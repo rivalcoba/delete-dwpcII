@@ -11,13 +11,14 @@ import webpack from 'webpack';
 import WebpackDevMiddleware from 'webpack-dev-middleware';
 import WebpackHotMiddleware from 'webpack-hot-middleware';
 
+// Importing template-engine
+import configTemplateEngine from './config/templateEngine';
+
 // Importing webpack configuration
 import webpackConfig from '../webpack.dev.config';
 
 // Impornting winston logger
 import log from './config/winston';
-
-// var debug = require('debug')('dwpcii:server');
 
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
@@ -63,9 +64,8 @@ if (nodeEnviroment === 'development') {
   console.log('🏭 Ejecutando en modo producción 🏭');
 }
 
-// Configurando el motor de plantillas
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+// Configuring the template engine
+configTemplateEngine(app);
 
 // Se establecen los middlewares
 app.use(morgan('dev', { stream: log.stream }));
