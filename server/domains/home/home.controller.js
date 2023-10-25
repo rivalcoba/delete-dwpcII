@@ -7,6 +7,11 @@ const home = (req, res) => {
   res.render('index', { title: 'DWPCII-2023A', icon });
 };
 
+const about = (req, res) => {
+  res.send("🚧 UNDER CONSTRUCTION GET  '/project/about' 🚧");
+};
+
 export default {
   home,
+  about,
 };
