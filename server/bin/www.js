@@ -13,6 +13,9 @@ import log from '../config/winston';
 // Importing configuration keys
 import configKeys from '../config/configKeys';
 
+// Importing db connection function
+import connectWithRetry from '../database/mongooseConnection';
+
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -79,6 +82,9 @@ function onListening() {
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
   log.info(`📢 Listening on ${bind}`);
 }
+
+// Launching db connection
+connectWithRetry(configKeys.MONGO_URL);
 
 /**
  * Listen on provided port, on all network interfaces.
