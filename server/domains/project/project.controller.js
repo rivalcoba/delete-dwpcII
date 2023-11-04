@@ -3,7 +3,7 @@
 // GET '/project/addForm'
 // GET '/project/add'
 const addForm = (req, res) => {
-  res.send("🚧 UNDER CONSTRUCTION GET  '/project/addForm' 🚧");
+  res.render('project/addView');
 };
 
 // GET '/project/showDashboard'
