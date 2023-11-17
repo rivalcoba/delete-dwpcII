@@ -46,9 +46,12 @@ const addPost = async (req, res) => {
   try {
     // Creando la instancia de un documento con los valores de 'project'
     const savedProject = await ProjectModel.create(project);
-    // Se contesta la información del proyecto al cliente
-    log.info('Se entrega al cliente información del proyecto cargado');
-    return res.status(200).json(savedProject);
+    // Se informa al cliente que se guardo el proyecto
+    log.info(`Se carga proyecto ${savedProject}`);
+    // Se registra en el log el redireccionamiento
+    log.info('Se redirecciona el sistema a /project');
+    // Se redirecciona el sistema a la ruta '/project'
+    return res.redirect('/project/showDashboard');
   } catch (error) {
     log.error(
       'ln 53 project.controller: Error al guardar proyecto en la base de datos',
