@@ -130,10 +130,14 @@ const editPut = async (req, res) => {
   }
 };
 
+// DELETE "/project/:id"
+const deleteProject = (req, res) => res.status(200).json({ id: req.params.id });
+
 export default {
   addForm,
   showDashboard,
   addPost,
   edit,
   editPut,
+  deleteProject,
 };
