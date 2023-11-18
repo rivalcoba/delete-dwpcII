@@ -79,7 +79,7 @@ const edit = async (req, res) => {
         .json({ fail: `No se encontro el proyecto con el id: ${id}` });
     }
     log.info(`Proyecto encontrado con el id: ${id}`);
-    return res.status(200).json(project);
+    return res.render('project/editView', { project });
   } catch (error) {
     log.error('Ocurre un error en: metodo "error" de project.controller');
     return res.status(500).json(error);
