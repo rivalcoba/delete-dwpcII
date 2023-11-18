@@ -86,9 +86,15 @@ const edit = async (req, res) => {
   }
 };
 
+// PUT "/project/edit/:id"
+const editPut = (req, res) => {
+  res.status(200).send('Request attended: "/project/edit/:id"');
+};
+
 export default {
   addForm,
   showDashboard,
   addPost,
   edit,
+  editPut,
 };
