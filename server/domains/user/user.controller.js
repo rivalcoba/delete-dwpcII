@@ -1,4 +1,5 @@
 import log from '../../config/winston';
+import User from './user.model';
 // Action Methods
 
 // GET '/user/login'
@@ -19,15 +20,16 @@ const register = (req, res) => {
   res.render('user/register');
 };
 
-// POST '/user/register'
-const registerPost = (req, res) => {
-  const { validData, errorData } = req;
-  log.info('Se procesa formulario de registro');
-  res.json({
-    validData,
-    errorData,
-  });
-};
+// 20231124084021
+// http://127.0.0.1:5000/user/register
+
+{
+  "id": "6560b5d4f65d2a10ef3bab5f",
+  "firstName": "w",
+  "lastname": "ww",
+  "mail": "w@gmail.com",
+  "createdAt": "2023-11-24T14:40:20.093Z",
+  "updatedAt": "2023-11-24T14:40:20.093Z"
 
 export default {
   login,
