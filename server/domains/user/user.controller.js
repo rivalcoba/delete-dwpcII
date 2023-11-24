@@ -20,16 +20,27 @@ const register = (req, res) => {
   res.render('user/register');
 };
 
-// 20231124084021
-// http://127.0.0.1:5000/user/register
-
-{
-  "id": "6560b5d4f65d2a10ef3bab5f",
-  "firstName": "w",
-  "lastname": "ww",
-  "mail": "w@gmail.com",
-  "createdAt": "2023-11-24T14:40:20.093Z",
-  "updatedAt": "2023-11-24T14:40:20.093Z"
+// POST '/user/register'
+const registerPost = async (req, res) => {
+  const { validData: userFormData, errorData } = req;
+  log.info('Se procesa formulario de registro');
+  // Verificando si hay errores
+  if (errorData) {
+    return res.json(errorData);
+  }
+  // En caso de no haber errores, se crea el usuario
+  try {
+    // 1. Se crea una instancia del modelo User
+    // mendiante la funcion create del modelo
+    const user = await User.create(userFormData);
+    log.info(`Usuario creado: ${JSON.stringify(user)}`);
+    // 3. Se contesta al cliente con el usuario creado
+    return res.status(200).json(user.toJSON());
+  } catch (error) {
+    log.error(error);
+    return res.json({ message: error.message });
+  }
+};
 
 export default {
   login,
