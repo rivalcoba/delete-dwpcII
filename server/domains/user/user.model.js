@@ -12,6 +12,10 @@ const UserSchema = new Schema(
   {
     firstName: { type: String, required: true },
     lastname: { type: String, required: true },
+    image: {
+      type: String,
+      default: 'https://img.icons8.com/fluent/48/000000/user-male-circle.png',
+    },
     mail: {
       type: String,
       unique: true,
