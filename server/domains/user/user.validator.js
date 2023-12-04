@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-// Crear un esquema de validación
+// Crear un esquema de validación para usuario
 const signUpSchema = Yup.object().shape({
   firstName: Yup.string().required('Se requiere ingresar nombre'),
   lastname: Yup.string().required('Se requiere ingresar apellido'),
@@ -14,7 +14,7 @@ const signUpSchema = Yup.object().shape({
   ),
 });
 
-// Middleware de extracción
+// Middleware de extracción para usuario
 const getSignUp = (req) => {
   // Desestructuramos la informacion
   const { firstName, lastname, mail, password, cpassword } = req.body; // Se regresa el objeto signup
@@ -27,9 +27,29 @@ const getSignUp = (req) => {
   };
 };
 
+// Crear un esquema de validación para token de confirmación
+const tokenSchema = Yup.object().shape({
+  token: Yup.string().length(64).required(),
+});
+
+// Middleware de extracción para token de confirmación
+const getToken = (req) => {
+  // Desestructuramos la informacion
+  const { token } = req.params;
+  // Se regresa el objeto signup
+  return {
+    token,
+  };
+};
+
+const token = {
+  schema: tokenSchema,
+  getObject: getToken,
+};
+
 const signUp = {
   schema: signUpSchema,
   getObject: getSignUp,
 };
 
-export default { signUp };
+export default { signUp, token };

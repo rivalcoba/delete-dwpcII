@@ -79,7 +79,7 @@ UserSchema.methods = {
   },
   // Genera un token de 64 caracteres aleatorios
   generateConfirmationToken() {
-    return crypto.randomBytes(64).toString('hex');
+    return crypto.randomBytes(32).toString('hex');
   },
   // Funcion de tranformacion a Json personalizada
   toJSON() {
@@ -95,6 +95,21 @@ UserSchema.methods = {
       updatedAt: this.updatedAt,
     };
   },
+  // Metodo para activar el usuario
+  async activate() {
+    await this.updateOne({
+      emailConfirmationToken: null,
+      // updatedAt: new Date(),
+      emailConfirmationAt: new Date(),
+    }).exec();
+  },
+};
+
+// Statics Methods
+UserSchema.statics.findByToken = async function findByToken(token) {
+  // This hace referencia al modelo es decir
+  // a todo el conjunto de documentos
+  return this.findOne({ emailConfirmationToken: token });
 };
 
 // Hooks
@@ -137,11 +152,11 @@ UserSchema.post('save', async function sendConfirmationMail() {
         lastname: this.lastname,
         mail: this.mail,
         token: this.emailConfirmationToken,
+        host: configKeys.APP_URL,
       },
-      `
-      Estimado ${this.firstName} ${this.lastname}  
-      hemos enviado un correo de confirmación a ${this.mail}  
-      favor de hacer clic en enlace de dicho correo`,
+      `Estimado ${this.firstName} ${this.lastname} 
+      para validar tu cuenta debes hacer clic en el siguiente
+      enlace: ${configKeys.APP_URL}/user/confirm/${this.token}`,
     );
 
     if (!info) return log.info('😭 No se pudo enviar el correo');

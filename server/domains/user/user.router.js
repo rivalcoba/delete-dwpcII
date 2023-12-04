@@ -23,6 +23,13 @@ router.get('/logout', userController.logout);
 // GET '/user/register'
 router.get('/register', userController.register);
 
+// GET 'user/confirm/<token>'
+router.get(
+  '/confirm/:token',
+  ValidateFactory(userValidator.token),
+  userController.confirm,
+);
+
 // POST '/user/register'
 router.post(
   '/register',
