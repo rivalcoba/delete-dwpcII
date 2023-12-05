@@ -15,6 +15,10 @@ const addForm = (req, res) => {
 // GET '/project/projects'
 // GET '/project'
 const showDashboard = async (req, res) => {
+  // Log de los query params
+  if (req.query.message) {
+    res.locals.successMessage = `Bienvenido a Projnotes ${req.user.firstName}`;
+  }
   // Consultado todos los proyectos
   const projects = await ProjectModel.find({}).lean().exec();
   // Se entrega la vista dashboardView con el viewmodel projects
