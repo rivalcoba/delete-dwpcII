@@ -37,14 +37,7 @@ router.post(
 router.get('/edit/:id', projectController.edit);
 
 // PUT "/project/edit/:id"
-router.put(
-  '/edit/:id',
-  ValidateFactory({
-    schema: projectValidator.projectSchema,
-    getObject: projectValidator.getProject,
-  }),
-  projectController.editPut,
-);
+router.put('/edit/:id', projectController.editPut);
 
 // DELETE "/project/:id"
 router.delete('/:id', projectController.deleteProject);

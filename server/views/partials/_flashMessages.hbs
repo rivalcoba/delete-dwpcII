@@ -11,7 +11,7 @@
     document.querySelector('script[src="/bundle.js"]').onload = ()=>{
     M.toast({
       html: '<i class="material-icons">info</i> {{infoMessage}}', 
-      classes: 'info', 
+      classes: 'card-panel orange accent-4 white-text', 
       displayLength: 2000 }) }
   </script>
 {{/if}}
@@ -20,7 +20,7 @@
     document.querySelector('script[src="/bundle.js"]').onload = ()=>{
     M.toast({
       html: "<i class='material-icons'>error</i> {{errorMessage}}", 
-      classes: 'error', 
+      classes: 'card-panel red accent-4 white-text', 
       displayLength: 2000}) }
   </script>
 {{/if}}
