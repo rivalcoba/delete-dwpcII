@@ -12,7 +12,18 @@ const login = (req, res) => {
 
 // GET '/user/logout'
 const logout = (req, res) => {
-  res.send("🚧 UNDER CONSTRUCTION GET  '/user/logout' 🚧");
+  // Passport incrusta en la petición el
+  // método logout aqui se ejecuta
+  // REF: https://www.passportjs.org/concepts/authentication/logout/
+  req.logout((err) => {
+    if (err) {
+      return res.json(err);
+    }
+    // Creamos mensaje de flash
+    req.flash('successMessage', 'Ha cerrado sesión correctamente');
+    // Redireccionamos al login
+    return res.redirect('/user/login');
+  });
 };
 
 // GET '/user/register'
