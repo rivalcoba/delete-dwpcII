@@ -82,7 +82,7 @@ UserSchema.methods = {
   generateConfirmationToken() {
     return crypto.randomBytes(32).toString('hex');
   },
-  // Funcion de tranformacion a Json personalizada
+  // Tranforma a Json el Usuario
   toJSON() {
     return {
       id: this._id,
@@ -96,13 +96,17 @@ UserSchema.methods = {
       updatedAt: this.updatedAt,
     };
   },
-  // Metodo para activar el usuario
+  // Activa el usuario
   async activate() {
     await this.updateOne({
       emailConfirmationToken: null,
       // updatedAt: new Date(),
       emailConfirmationAt: new Date(),
     }).exec();
+  },
+  // Verifica el password
+  authenticateUser(password) {
+    return bcrypt.compareSync(password, this.password);
   },
 };
 
