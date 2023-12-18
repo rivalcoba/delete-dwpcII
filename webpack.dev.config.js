@@ -9,7 +9,7 @@ const path = require('path');
 // que sera usado por webpack
 module.exports = {
   // 0. Modo de empaquetado
-  mode: "production",
+  mode: "development",
   // 1. El archivo de entrada a partir del cual
   // contendra todas las definiciones a empaquetar
   entry: "./client/index.js",
@@ -25,6 +25,18 @@ module.exports = {
     filename: "bundle.js",
     // 2.3 Ruta base de archivos estáticos
 		publicPath: "/"
+  },
+  // 3. Configurando el servidor de desarrollo
+  // El servidor de desarrollo sirve los archivos
+  // empaquetados para no tener que estar reempaquetando
+  // en cada cambio del código.
+  devServer: {
+    // 3.1 Folder de archivos estáticos
+    static: path.join(__dirname, "public"),
+    // 3.2 Puerto del servidor de desarrollo
+    port: 8080,
+    // 3.3 Definiendo el host
+    host: "0.0.0.0"
   },
   // 3. Configuración de los loaders
   module:{
