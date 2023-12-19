@@ -1,3 +1,6 @@
+// Importing Extract Plugin
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 // Notas importanes
 // 🚨 El archivo de configuración debe usar ES5 no ES6
 // es por ello que veras "requires" no "imports"
@@ -57,7 +60,25 @@ module.exports = {
             }
           }
         ]
+      },
+      // 3.2 Reglas para archivos CSS
+      {
+        test: /\.css$/,
+        use: [
+          // 3.2.1 Usar el loader de mini-css-extract
+          MiniCssExtractPlugin.loader,
+          // 3.2.2 Usar el loader de css-loader
+          "css-loader"
+        ]
       }
     ]
-  }
+  },
+  // 4. Configuración de plugins
+  plugins: [
+    // 4.1 Instanciar el plugin de mini-css-extract
+    new MiniCssExtractPlugin({
+      // 4.1.1 Nombre del archivo de salida
+      filename: "styles/app.css"
+    })
+  ]
 };
