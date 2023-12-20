@@ -8,6 +8,8 @@
 import debugLib from 'debug';
 import http from 'http';
 import app from '../app';
+// Importando llaves de configuración
+import configKeys from '../config/configKeys';
 
 const debug = debugLib('it-server');
 
@@ -35,7 +37,7 @@ function normalizePort(val) {
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(configKeys.PORT);
 app.set('port', port);
 
 /**
