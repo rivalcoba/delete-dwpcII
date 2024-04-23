@@ -8,7 +8,7 @@ const showDashboard = (req, res) => {
 // GET "/project/add"
 // GET "/project/add-form"
 const addForm = (req, res) => {
-  res.send('⚠️ UNDER CONSTRUCTION: GET /project/add ⚠️');
+  res.render('project/addView');
 };
 
 export default {
