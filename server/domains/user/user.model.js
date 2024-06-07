@@ -7,6 +7,8 @@ import bcrypt from 'bcrypt';
 // Importando crypto
 // crypto sirve para generar tokens aleatorios
 import crypto from 'crypto';
+import uniqueValidator from 'mongoose-unique-validator';
+
 // 2. Desestructuramos Schema de Mongoose
 const { Schema } = mongoose;
 // 3. Creamos un nuevo Schema
@@ -59,6 +61,10 @@ const UserSchema = new Schema(
   },
   { timestamps: true },
 );
+
+// 3.0 Asignando Plugins
+UserSchema.plugin(uniqueValidator);
+
 // 3.1 Asignando Métodos de instancia
 UserSchema.methods = {
   // Metodo para encriptar el password
@@ -68,6 +74,20 @@ UserSchema.methods = {
   // Genera tokes de 64 caracteres aleatorios
   generateConfirmationToken() {
     return crypto.randomBytes(32).toString('hex');
+  },
+  // Funcion personalizada de transformacion a Json
+  toJSON() {
+    return {
+      id: this._id,
+      firstName: this.firstName,
+      lastname: this.lastname,
+      image: this.image,
+      mail: this.mail,
+      emailConfirmationAt: this.emailConfirmationAt,
+      emailConfirmationToken: this.emailConfirmationToken,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+    };
   },
 };
 
